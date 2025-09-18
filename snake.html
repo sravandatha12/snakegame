@@ -1,0 +1,191 @@
+<!--demo of snake game-->
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Snake Game</title>
+    <style>
+        body{
+            font-family: papyrus, fantasy;
+            text-align: center;
+            text-shadow: #e3d6d6 0px 0px 10px;
+            background-image: url("data:image/jpeg;base64,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");
+            background-color: #0e0d0d;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        p{
+            color: rgb(213, 25, 78);
+        }
+        h1 {
+            color: #e3d6d6;
+        }
+        canvas {
+            margin-top: 20px;
+            border: 2px solid #ab3232; 
+            box-shadow: #e3d6d6 0px 0px 10px;
+        }
+    
+        button {
+            padding: 10px 15px;
+            background-color: #424e57;
+            color: rgb(11, 9, 9);
+            border: blanchedalmond 1px solid;
+            border-radius: 10px;
+        }
+        span {
+            color: #131212;
+            font-size: 20px;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+        <h1>Snake Game</h1>
+        <p>Use the arrow keys to control the snake.</p>
+        <canvas id="gameCanvas" width="400" height="400" style="border:1px solid #b16969;"></canvas>
+        <script>
+            function playAgain() {
+                alert("Game reset! You can start playing again.");
+            }
+        </script>
+        <p>Enjoy the game!</p>
+        <button id="playAgainBtn">Play Again</button>
+        <button onclick="window.close()">Exit</button>
+        <p>
+        <button id="restartBtn">Restart</button>
+        <br></br>
+
+        <span>Score: <span id="score">0</span></span>
+        <div id="gameOver" style="display:none; color: #e3d6d6; font-size: 24px; margin-top: 10px;">
+            Game Over!
+        </div>
+        <script>
+            // Simple Snake Game Logic
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            const box = 20;
+            let snake = [{ x: 9 * box, y: 10 * box }];
+            let direction = 'RIGHT';
+            let food = {
+                x: Math.floor(Math.random() * 20) * box,
+                y: Math.floor(Math.random() * 20) * box
+            };
+            let score = 0;
+            let gameInterval;
+            const scoreSpan = document.getElementById('score');
+            const gameOverDiv = document.getElementById('gameOver');
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw snake
+                for (let i = 0; i < snake.length; i++) {
+                    ctx.fillStyle = i === 0 ? '#ab3232' : '#e3d6d6';
+                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                    ctx.strokeStyle = '#0e0d0d';
+                    ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+                }
+
+                // Draw food
+                ctx.fillStyle = 'aqua';
+                ctx.fillRect(food.x, food.y, box, box);
+
+                // Move snake
+                let head = { x: snake[0].x, y: snake[0].y };
+                if (direction === 'LEFT') head.x -= box;
+                if (direction === 'UP') head.y -= box;
+                if (direction === 'RIGHT') head.x += box;
+                if (direction === 'DOWN') head.y += box;
+
+                // Check collision with food
+                if (head.x === food.x && head.y === food.y) {
+                    score++;
+                    scoreSpan.textContent = score;
+                    food = {
+                        x: Math.floor(Math.random() * 20) * box,
+                        y: Math.floor(Math.random() * 20) * box
+                    };
+                } else {
+                    snake.pop();
+                }
+
+                // Check collision with walls
+                if (
+                    head.x < 0 || head.x >= canvas.width ||
+                    head.y < 0 || head.y >= canvas.height ||
+                    collision(head, snake)
+                ) {
+                    clearInterval(gameInterval);
+                    gameOverDiv.style.display = 'block';
+                }
+
+                snake.unshift(head);
+            }
+
+            function collision(head, array) {
+                for (let i = 0; i < array.length; i++) {
+                    if (head.x === array[i].x && head.y === array[i].y) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft' && direction !== 'RIGHT') direction = 'LEFT';
+                if (e.key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
+                if (e.key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
+                if (e.key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
+            });
+
+            function startGame() {
+                snake = [{ x: 9 * box, y: 10 * box }];
+                direction = 'RIGHT';
+                score = 0;
+                scoreSpan.textContent = score;
+                food = {
+                    x: Math.floor(Math.random() * 20) * box,
+                    y: Math.floor(Math.random() * 20) * box
+                };
+                const controlsDiv = document.getElementById('controls');
+                        if (!controlsDiv) {
+                            const newControls = document.createElement('div');
+                            newControls.id = 'controls';
+                            newControls.style.margin = '15px';
+                            newControls.innerHTML = `
+                                <button id="btnUp">Up</button>
+                                <button id="btnLeft">Left</button>
+                                <button id="btnDown">Down</button>
+                                <button id="btnRight">Right</button>
+                            `;
+                            document.querySelector('.container').appendChild(newControls);
+
+                            document.getElementById('btnUp').onclick = function() {
+                                if (direction !== 'DOWN') direction = 'UP';
+                            };
+                            document.getElementById('btnLeft').onclick = function() {
+                                if (direction !== 'RIGHT') direction = 'LEFT';
+                            };
+                            document.getElementById('btnDown').onclick = function() {
+                                if (direction !== 'UP') direction = 'DOWN';
+                            };
+                            document.getElementById('btnRight').onclick = function() {
+                                if (direction !== 'LEFT') direction = 'RIGHT';
+                            };
+                        }
+                gameOverDiv.style.display = 'none';
+                clearInterval(gameInterval);
+                gameInterval = setInterval(draw, 200);
+            }
+
+            // Attach startGame to buttons
+            document.getElementById('playAgainBtn').onclick = startGame;
+            document.getElementById('restartBtn').onclick = startGame;
+
+            // Start game on load
+            startGame();
+        </script>
+        </p>
+        </div>
+    </body>
+</html>
